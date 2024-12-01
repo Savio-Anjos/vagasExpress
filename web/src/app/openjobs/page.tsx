@@ -24,7 +24,7 @@ export default function OpenJobs() {
       company: "Web Solutions",
     },
     {
-      id: "1",
+      id: "3",
       title: "Desenvolvedor Front-end",
       location: "São Paulo",
       salary: "R$ 5.000 - R$ 7.000",
@@ -33,7 +33,7 @@ export default function OpenJobs() {
       company: "Tech Solutions",
     },
     {
-      id: "2",
+      id: "4",
       title: "Analista de Sistemas",
       location: "Remoto",
       salary: "R$ 4.000 - R$ 6.000",
