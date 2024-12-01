@@ -5,7 +5,7 @@ import { RecruiterNotFoundError } from "@/use-cases/errors/recruiter-not-found-e
 import { makeUpdateJobUseCase } from "@/use-cases/factories/make-update-job-use-case";
 
 export async function updateJob(request: FastifyRequest, reply: FastifyReply) {
-  const createJobBodySchema = z.object({
+  const updateJobBodySchema = z.object({
     id: z.string().uuid(),
     recruiterId: z.string().uuid(),
     title: z.string().min(3).max(255),
@@ -35,7 +35,7 @@ export async function updateJob(request: FastifyRequest, reply: FastifyReply) {
     salaryRangeMin,
     salaryRangeMax,
     contractType,
-  } = createJobBodySchema.parse(request.body);
+  } = updateJobBodySchema.parse(request.body);
 
   try {
     const updateJobUseCase = makeUpdateJobUseCase();
