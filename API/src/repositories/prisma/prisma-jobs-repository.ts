@@ -29,4 +29,14 @@ export class PrismaJobsRepository implements JobsRepository {
 
     return job;
   }
+
+  public async delete(id: string): Promise<Job> {
+    const deletedJob = await prisma.job.delete({ where: { id } });
+
+    if (!deletedJob) {
+      throw new Error("Job not found");
+    }
+
+    return deletedJob;
+  }
 }

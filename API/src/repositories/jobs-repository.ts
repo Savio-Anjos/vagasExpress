@@ -5,4 +5,5 @@ export interface JobsRepository {
   findAll(): Promise<Job[]>;
   findRecruiterJobs(recruiterId: string): Promise<Job[]>;
   update(id: string, data: Prisma.JobUpdateInput): Promise<Job>;
+  delete(id: string): Promise<Job>;
 }
