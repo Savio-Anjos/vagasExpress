@@ -20,4 +20,13 @@ export class PrismaJobsRepository implements JobsRepository {
 
     return jobs;
   }
+
+  public async update(id: string, data: Prisma.JobUpdateInput): Promise<Job> {
+    const job = await prisma.job.update({
+      where: { id },
+      data,
+    });
+
+    return job;
+  }
 }
