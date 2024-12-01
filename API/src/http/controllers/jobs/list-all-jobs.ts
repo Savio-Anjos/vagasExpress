@@ -7,9 +7,9 @@ export async function listAllJobs(
   reply: FastifyReply
 ) {
   try {
-    const createJobUseCase = makeListAllJobsUseCase();
+    const listAllJobs = makeListAllJobsUseCase();
 
-    const { jobs } = await createJobUseCase.execute({});
+    const { jobs } = await listAllJobs.execute({});
 
     return reply.status(200).send(jobs);
   } catch (error) {
