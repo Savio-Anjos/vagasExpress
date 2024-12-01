@@ -1,71 +1,66 @@
 .container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   height: 100vh;
   padding: 2rem;
   background-color: var(--color-blue-900);
-  color: var(--color-white);
-}
-
-.title {
-  font-size: 2.4rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  text-align: center;
-}
-
-.subtitle {
-  font-size: 1.6rem;
-  margin-bottom: 2rem;
-  text-align: center;
-  color: var(--color-gray-500);
 }
 
 .form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  background-color: var(--color-white);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px var(--color-gray-600);
   width: 100%;
   max-width: 400px;
 }
 
-.inputGroup {
-  display: flex;
-  flex-direction: column;
+.title {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--color-blue-800);
+  font-size: 2rem;
 }
 
-.label {
-  margin-bottom: 0.5rem;
-  font-size: 1.2rem;
-  color: var(--color-gray-500);
+.field {
+  margin-bottom: 1.8rem;
 }
 
-.input {
-  padding: 0.8rem 1rem;
-  border: 1px solid var(--color-gray-500);
-  border-radius: 0.5rem;
+.field label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.8rem;
+  color: var(--color-gray-700);
+  font-size: 1.1rem;
+}
+
+.field input {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid var(--color-gray-600);
+  border-radius: 6px;
   font-size: 1rem;
-  background-color: var(--color-black-300);
-  color: var(--color-white);
+  margin-top: 0.5rem;
 }
 
-.input:focus {
+.field input:focus {
   border-color: var(--color-blue-500);
   outline: none;
 }
 
 .button {
+  width: 100%;
   padding: 1rem;
   background-color: var(--color-green-700);
   color: var(--color-white);
+  font-size: 1rem;
   border: none;
-  border-radius: 0.5rem;
-  font-size: 1.4rem;
-  font-weight: bold;
+  border-radius: 6px;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
 }
 
 .button:hover {

@@ -41,15 +41,14 @@ export default function CompleteProfile() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Completar Perfil</h1>
       <form onSubmit={handleSubmit} className={styles.form}>
-        <div className={styles.inputGroup}>
-          <label htmlFor="experience" className={styles.label}>
-            Experiência Profissional *
-          </label>
+        <h1 className={styles.title}>Completar Perfil</h1>
+
+        {/* Experiência Profissional */}
+        <div className={styles.field}>
+          <label htmlFor="experience">Experiência Profissional *</label>
           <textarea
             id="experience"
-            className={styles.textarea}
             value={experience}
             onChange={(e) => setExperience(e.target.value)}
             placeholder="Descreva seu histórico profissional"
@@ -57,15 +56,14 @@ export default function CompleteProfile() {
           ></textarea>
         </div>
 
-        <div className={styles.inputGroup}>
-          <label htmlFor="skills" className={styles.label}>
-            Habilidades
-          </label>
-          <div className={styles.tagsContainer}>
+        {/* Habilidades */}
+        <div className={styles.field}>
+          <label htmlFor="skills">Habilidades</label>
+          <div className={styles.skillsContainer}>
             {skills.map((skill) => (
               <span
                 key={skill}
-                className={styles.tag}
+                className={styles.skillTag}
                 onClick={() => handleRemoveSkill(skill)}
               >
                 {skill} ×
@@ -75,7 +73,6 @@ export default function CompleteProfile() {
           <input
             type="text"
             id="skills"
-            className={styles.input}
             placeholder="Digite uma habilidade e pressione Enter"
             onKeyDown={(e) => {
               if (e.key === "Enter") {
@@ -87,13 +84,11 @@ export default function CompleteProfile() {
           />
         </div>
 
-        <div className={styles.inputGroup}>
-          <label htmlFor="experienceTime" className={styles.label}>
-            Tempo de Experiência *
-          </label>
+        {/* Tempo de Experiência */}
+        <div className={styles.field}>
+          <label htmlFor="experienceTime">Tempo de Experiência *</label>
           <select
             id="experienceTime"
-            className={styles.select}
             value={experienceTime}
             onChange={(e) => setExperienceTime(e.target.value)}
             required
@@ -106,15 +101,13 @@ export default function CompleteProfile() {
           </select>
         </div>
 
-        <div className={styles.inputGroup}>
-          <label htmlFor="salaryMin" className={styles.label}>
-            Faixa Salarial Esperada
-          </label>
+        {/* Faixa Salarial Esperada */}
+        <div className={styles.field}>
+          <label htmlFor="salary">Faixa Salarial Esperada</label>
           <div className={styles.salaryContainer}>
             <input
               type="number"
               id="salaryMin"
-              className={styles.input}
               value={salaryMin}
               onChange={(e) => setSalaryMin(e.target.value)}
               placeholder="Mínimo"
@@ -122,7 +115,6 @@ export default function CompleteProfile() {
             <input
               type="number"
               id="salaryMax"
-              className={styles.input}
               value={salaryMax}
               onChange={(e) => setSalaryMax(e.target.value)}
               placeholder="Máximo"
@@ -130,14 +122,12 @@ export default function CompleteProfile() {
           </div>
         </div>
 
-        <div className={styles.inputGroup}>
-          <label htmlFor="phone" className={styles.label}>
-            Telefone *
-          </label>
+        {/* Telefone */}
+        <div className={styles.field}>
+          <label htmlFor="phone">Telefone *</label>
           <input
             type="text"
             id="phone"
-            className={styles.input}
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             placeholder="(XX) XXXXX-XXXX"
