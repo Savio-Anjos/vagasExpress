@@ -1,7 +1,7 @@
 import { JobApplication } from "@prisma/client";
 import { JobsRepository } from "@/repositories/jobs-repository";
 import { CandidatesRepository } from "@/repositories/candidates-repository";
-import { JobApplicationRepository } from "@/repositories/prisma/prisma-jobApplications-repository";
+import { PrismaJobApplicationRepository } from "@/repositories/prisma/prisma-jobApplications-repository";
 import { CandidateNotFoundError } from "../errors/canditate-not-found-error";
 import { JobNotFoundError } from "../errors/job-not-found-error";
 import { JobApplicationAlreadyExistsError } from "../errors/job-already-exists-error";
@@ -19,7 +19,7 @@ export class ApplyForJobUseCase {
   constructor(
     private jobsRepository: JobsRepository,
     private candidatesRepository: CandidatesRepository,
-    private jobApplicationRepository: JobApplicationRepository
+    private jobApplicationRepository: PrismaJobApplicationRepository
   ) {}
 
   public async execute({
