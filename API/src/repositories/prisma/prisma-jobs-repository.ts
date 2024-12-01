@@ -14,4 +14,10 @@ export class PrismaJobsRepository implements JobsRepository {
 
     return jobs;
   }
+
+  public async findRecruiterJobs(recruiterId: string): Promise<Job[]> {
+    const jobs = await prisma.job.findMany({ where: { recruiterId } });
+
+    return jobs;
+  }
 }
