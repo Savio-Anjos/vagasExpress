@@ -20,7 +20,12 @@ export async function createRecruiter(
   try {
     const createRecruiterUseCase = makeCreateRecruiterUseCase();
 
-    await createRecruiterUseCase.execute({ name, email, password });
+    const recruiter = await createRecruiterUseCase.execute({
+      name,
+      email,
+      password,
+    });
+    return reply.status(201).send(recruiter);
   } catch (err) {
     if (err instanceof RecruiterAlreadyExistsError) {
       return reply.status(409).send({ message: err.message });
@@ -28,6 +33,4 @@ export async function createRecruiter(
 
     throw err;
   }
-
-  return reply.status(201).send();
 }
