@@ -28,7 +28,7 @@ export class UpdateCandidateUseCase {
   }: UpdateCandidateUseCaseRequest): Promise<UpdateCandidateUseCaseResponse> {
     const verifyCandidateExists = await this.candidatesRepository.findById(id);
 
-    if (verifyCandidateExists) {
+    if (!verifyCandidateExists) {
       throw new CandidateNotFoundError();
     }
 
