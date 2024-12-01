@@ -1,4 +1,4 @@
-import { Prisma, Job } from "@prisma/client";
+import { Prisma, Job, JobStatus } from "@prisma/client";
 import { JobsRepository } from "../jobs-repository";
 import { prisma } from "@/lib/prisma";
 
@@ -13,6 +13,16 @@ export class PrismaJobsRepository implements JobsRepository {
     const job = await prisma.job.findUnique({ where: { id } });
 
     return job;
+  }
+
+  public async findOpenJobs(): Promise<Job[]> {
+    const openedJobs = prisma.job.findMany({
+      where: {
+        status: JobStatus.OPEN,
+      },
+    });
+
+    return openedJobs;
   }
 
   public async findAll(): Promise<Job[]> {
