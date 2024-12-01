@@ -1,6 +1,4 @@
-import { CandidatesRepository } from "@/repositories/candidates-repository";
-import { Candidate, ExperienceTime, Recruiter } from "@prisma/client";
-import { CandidateNotFoundError } from "../errors/canditate-not-found-error";
+import { Recruiter } from "@prisma/client";
 import { RecruiterNotFoundError } from "../errors/recruiter-not-found-error";
 import { RecruitersRepository } from "@/repositories/recruiters-repository";
 

@@ -21,9 +21,9 @@ export async function updateCandidate(
     updateCandidateBodySchema.parse(request.body);
 
   try {
-    const createCandidateUseCase = makeUpdateCandidateUseCase();
+    const updateCandidateUseCase = makeUpdateCandidateUseCase();
 
-    const candidate = await createCandidateUseCase.execute({
+    const candidate = await updateCandidateUseCase.execute({
       id,
       experience,
       skills,
