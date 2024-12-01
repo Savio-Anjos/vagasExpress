@@ -1,0 +1,91 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Candidate {
+  id                String          @id @default(uuid())
+  name              String
+  email             String          @unique
+  password_hash     String
+  experience        String?
+  skills            String[]
+  experienceTime    ExperienceTime?
+  salaryExpectation Int?
+  phone             String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  applications JobApplication[]
+}
+
+model Recruiter {
+  id            String   @id @default(uuid())
+  name          String
+  email         String   @unique
+  password_hash String
+  phone         String?
+  jobTitle      String?
+  company       String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  jobs Job[]
+}
+
+model Job {
+  id               String       @id @default(uuid())
+  title            String
+  description      String
+  requiredSkills   String[]
+  desiredSkills    String[]
+  experienceNeeded Int
+  location         String
+  openingDate      DateTime
+  closingDate      DateTime
+  salaryRangeMin   Int?
+  salaryRangeMax   Int?
+  contractType     ContractType
+  status           JobStatus    @default(OPEN)
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+
+  recruiter    Recruiter        @relation(fields: [recruiterId], references: [id])
+  recruiterId  String
+  applications JobApplication[]
+}
+
+model JobApplication {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  score     Float
+
+  job         Job       @relation(fields: [jobId], references: [id])
+  jobId       String
+  candidate   Candidate @relation(fields: [candidateId], references: [id])
+  candidateId String
+}
+
+enum ExperienceTime {
+  LESS_THAN_6_MONTHS
+  SIX_TO_12_MONTHS
+  ONE_TO_TWO_YEARS
+  MORE_THAN_TWO_YEARS
+}
+
+enum ContractType {
+  CLT
+  PJ
+  INTERNSHIP
+  TEMPORARY
+}
+
+enum JobStatus {
+  OPEN
+  CLOSED
+}
