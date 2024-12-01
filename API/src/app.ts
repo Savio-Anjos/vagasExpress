@@ -5,6 +5,7 @@ import { fastifyCors } from "@fastify/cors";
 import { env } from "./env";
 import { candidatesRoutes } from "./http/controllers/candidates/routes";
 import { recruitersRoutes } from "./http/controllers/recruiters/routes";
+import { jobsRoutes } from "./http/controllers/jobs/routes";
 
 export const app = fastify();
 
@@ -18,6 +19,7 @@ app.register(fastifyJwt, {
 
 app.register(candidatesRoutes);
 app.register(recruitersRoutes);
+app.register(jobsRoutes);
 
 app.setErrorHandler((error, _, reply) => {
   if (error instanceof ZodError) {
