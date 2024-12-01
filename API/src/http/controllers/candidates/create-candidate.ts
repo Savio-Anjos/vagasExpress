@@ -18,9 +18,9 @@ export async function createCandidate(
   );
 
   try {
-    const createAdmUseCase = makeCreateCandidateUseCase();
+    const createCandidateUseCase = makeCreateCandidateUseCase();
 
-    await createAdmUseCase.execute({ name, email, password });
+    await createCandidateUseCase.execute({ name, email, password });
   } catch (err) {
     if (err instanceof CandidateAlreadyExistsError) {
       return reply.status(409).send({ message: err.message });
