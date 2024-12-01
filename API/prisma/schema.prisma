@@ -8,12 +8,18 @@ datasource db {
 }
 
 model Candidate {
-  id            String   @id @default(uuid())
-  name          String
-  email         String   @unique
-  password_hash String
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id                String          @id @default(uuid())
+  name              String
+  email             String          @unique
+  password_hash     String
+  experience        String?
+  skills            String[]
+  experienceTime    ExperienceTime?
+  salaryExpectation Int?
+  phone             String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   applications JobApplication[]
 }
@@ -23,9 +29,9 @@ model Recruiter {
   name          String
   email         String   @unique
   password_hash String
-  phone         String
-  jobTitle      String
-  company       String
+  phone         String?
+  jobTitle      String?
+  company       String?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
