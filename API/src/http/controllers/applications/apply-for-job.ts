@@ -19,12 +19,12 @@ export async function applyForJob(
   try {
     const applyForJobUseCase = makeApplyForJobUseCase();
 
-    const { jobApplication } = await applyForJobUseCase.execute({
+    const { application } = await applyForJobUseCase.execute({
       candidateId,
       jobId,
     });
 
-    return reply.status(201).send(jobApplication);
+    return reply.status(201).send(application);
   } catch (error) {
     if (error instanceof CandidateNotFoundError) {
       return reply.status(404).send({ message: "Candidate not found" });

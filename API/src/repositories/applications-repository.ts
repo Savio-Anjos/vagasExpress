@@ -6,4 +6,5 @@ export interface ApplicationsRepository {
     candidateId: string,
     jobId: string
   ): Promise<JobApplication | null>;
+  findByJobId(jobId: string): Promise<JobApplication[]>;
 }

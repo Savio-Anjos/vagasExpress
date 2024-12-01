@@ -12,7 +12,7 @@ interface ApplyForJobUseCaseRequest {
 }
 
 interface ApplyForJobUseCaseResponse {
-  jobApplication: JobApplication;
+  application: JobApplication;
 }
 
 export class ApplyForJobUseCase {
@@ -45,12 +45,12 @@ export class ApplyForJobUseCase {
       throw new JobApplicationAlreadyExistsError();
     }
 
-    const jobApplication = await this.applicationRepository.create({
+    const application = await this.applicationRepository.create({
       job: { connect: { id: jobId } },
       candidate: { connect: { id: candidateId } },
       score: 0,
     });
 
-    return { jobApplication };
+    return { application };
   }
 }
