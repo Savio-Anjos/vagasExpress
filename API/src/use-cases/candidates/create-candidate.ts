@@ -10,7 +10,7 @@ interface CreateCandidateUseCaseRequest {
 }
 
 interface CreateCandidateUseCaseResponse {
-  Candidate: Candidate;
+  candidate: Candidate;
 }
 
 export class CreateCandidateUseCase {
@@ -31,16 +31,16 @@ export class CreateCandidateUseCase {
       throw new CandidateAlreadyExistsError();
     }
 
-    const Candidate = await this.candidatesRepository.create({
+    const candidate = await this.candidatesRepository.create({
       name,
       email,
       password_hash,
     });
 
-    if (!Candidate) {
+    if (!candidate) {
       throw new CandidateAlreadyExistsError();
     }
 
-    return { Candidate };
+    return { candidate };
   }
 }
