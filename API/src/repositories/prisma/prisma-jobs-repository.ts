@@ -8,4 +8,10 @@ export class PrismaJobsRepository implements JobsRepository {
 
     return job;
   }
+
+  public async findAll(): Promise<Job[]> {
+    const jobs = await prisma.job.findMany();
+
+    return jobs;
+  }
 }
