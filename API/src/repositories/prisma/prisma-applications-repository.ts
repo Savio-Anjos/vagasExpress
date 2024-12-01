@@ -20,6 +20,9 @@ export class PrismaApplicationRepository implements ApplicationsRepository {
         candidateId,
         jobId,
       },
+      include: {
+        candidate: true,
+      },
     });
 
     return jobApplication;
