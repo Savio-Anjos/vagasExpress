@@ -1,6 +1,6 @@
 import { Prisma, JobApplication } from "@prisma/client";
 
-export interface JobApplicationsRepository {
+export interface ApplicationsRepository {
   create(data: Prisma.JobApplicationCreateInput): Promise<JobApplication>;
   findByCandidateAndJob(
     candidateId: string,

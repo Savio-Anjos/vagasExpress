@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma"; // Supondo que Prisma Client esteja configurado
 import { JobApplication, Prisma } from "@prisma/client";
 
-export class PrismaJobApplicationRepository {
+export class PrismaApplicationRepository {
   public async create(
     data: Prisma.JobApplicationCreateInput
   ): Promise<JobApplication> {
