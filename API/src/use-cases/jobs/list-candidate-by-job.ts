@@ -15,14 +15,12 @@ interface ListCandidatesByJobUseCaseResponse {
 }
 
 export class ListCandidatesByJobUseCase {
-  constructor(private jobApplicationRepository: ApplicationsRepository) {}
+  constructor(private applicationRepository: ApplicationsRepository) {}
 
   public async execute({
     jobId,
   }: ListCandidatesByJobUseCaseRequest): Promise<ListCandidatesByJobUseCaseResponse> {
-    const jobApplications = await this.jobApplicationRepository.findByJobId(
-      jobId
-    );
+    const jobApplications = await this.applicationRepository.findByJobId(jobId);
     if (!jobApplications.length) {
       throw new JobNotFoundError();
     }
