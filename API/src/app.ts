@@ -3,6 +3,7 @@ import { ZodError } from "zod";
 import fastifyJwt from "@fastify/jwt";
 import { fastifyCors } from "@fastify/cors";
 import { env } from "./env";
+import { candidatesRoutes } from "./http/controllers/candidates/routes";
 
 export const app = fastify();
 
@@ -13,6 +14,8 @@ app.register(fastifyCors, {
 app.register(fastifyJwt, {
   secret: env.JWT_SECRET,
 });
+
+app.register(candidatesRoutes);
 
 app.setErrorHandler((error, _, reply) => {
   if (error instanceof ZodError) {
