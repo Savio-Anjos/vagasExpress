@@ -8,23 +8,26 @@ datasource db {
 }
 
 model Candidate {
-  id        String   @id @default(uuid())
-  name      String
-  email     String   @unique
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id            String   @id @default(uuid())
+  name          String
+  email         String   @unique
+  password_hash String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   applications JobApplication[]
 }
 
 model Recruiter {
-  id        String   @id @default(uuid())
-  phone     String
-  jobTitle  String
-  company   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id            String   @id @default(uuid())
+  name          String
+  email         String   @unique
+  password_hash String
+  phone         String
+  jobTitle      String
+  company       String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   jobs Job[]
 }
