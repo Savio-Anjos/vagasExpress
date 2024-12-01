@@ -10,7 +10,7 @@ html,
 body {
   height: 100%;
   background-color: var(--color-blue-900);
-  color: var(--color-gray-500);
+  color: var(--color-black-500);
 }
 
 body {
