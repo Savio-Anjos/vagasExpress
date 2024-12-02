@@ -1,28 +1,56 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
+import { updateRecruiter } from "@/services/recruiters";
+import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 
 export default function CompleteRecruiterProfile() {
+  const [recruiterId, setRecruiterId] = useState("");
   const [phone, setPhone] = useState("");
   const [jobTitle, setJobTitle] = useState("");
   const [company, setCompany] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const router = useRouter();
 
-  const handleSubmit = (e: FormEvent) => {
+  useEffect(() => {
+    const storedRecruiterId = localStorage.getItem("recruiterId");
+    if (storedRecruiterId) {
+      setRecruiterId(storedRecruiterId);
+    } else {
+      setErrorMessage("Recrutador não identificado. Faça login novamente.");
+    }
+  }, []);
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    if (!phone || !jobTitle || !company) {
-      alert("Preencha todos os campos obrigatórios!");
+    if (!recruiterId || !phone || !jobTitle || !company) {
+      setErrorMessage("Preencha todos os campos obrigatórios!");
       return;
     }
 
-    console.log({ phone, jobTitle, company });
+    try {
+      await updateRecruiter({ id: recruiterId, phone, jobTitle, company });
+      alert("Perfil atualizado com sucesso!");
+      router.push("/myjobs");
+    } catch (error: any) {
+      console.error(
+        "Erro na requisição:",
+        error.response?.data || error.message
+      );
+      setErrorMessage(
+        error.response?.data?.message || "Erro ao salvar o perfil."
+      );
+    }
   };
 
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit} className={styles.form}>
         <h1 className={styles.title}>Completar Perfil de Recrutador</h1>
+
+        {errorMessage && <p className={styles.error}>{errorMessage}</p>}
 
         <div className={styles.field}>
           <label htmlFor="phone">Telefone para Contato *</label>

@@ -23,10 +23,10 @@ export const authenticateRecruiter = async (data: {
 };
 
 export const updateRecruiter = async (data: {
+  id: string;
   phone?: string;
   jobTitle?: string;
   company?: string;
 }) => {
-  const response = await api.put("/recruiters", data);
-  return response.data;
+  return await api.put("/recruiters", data);
 };

@@ -21,12 +21,19 @@ export default function SignInRecruiter() {
     }
 
     try {
-      const response: any = await authenticateRecruiter({ email, password });
+      const response = await authenticateRecruiter({ email, password });
 
-      if (response.token) {
-        localStorage.setItem("token", response.token);
+      if (response) {
+        const { id, token } = response;
 
-        router.push("/signup/recruiter/complete");
+        if (id && token) {
+          localStorage.setItem("recruiterId", id);
+          localStorage.setItem("token", token);
+
+          router.push("/signup/recruiter/complete");
+        } else {
+          setErrorMessage("Erro ao obter o token ou ID.");
+        }
       }
     } catch (error: any) {
       console.error("Erro ao autenticar:", error);
