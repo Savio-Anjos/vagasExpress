@@ -36,7 +36,7 @@ export default function SignupCandidate() {
       });
 
       alert("Cadastro realizado com sucesso!");
-      router.push("/signin/candidate"); // Redirecionar para a página de login
+      router.push("/signup/candidate/signin");
     } catch (error: any) {
       console.error(error);
       setErrorMessage(error.response?.data?.message || "Erro ao cadastrar.");
@@ -83,7 +83,6 @@ export default function SignupCandidate() {
             placeholder="Crie uma senha"
             value={formData.password}
             onChange={handleChange}
-            pattern="(?=.*\d)(?=.*[A-Z]).{8,}"
             title="A senha deve ter pelo menos 8 caracteres, incluindo um número e uma letra maiúscula."
             required
           />

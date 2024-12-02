@@ -1,13 +1,18 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
+import { authenticateCandidate } from "@/services/candidates";
 import styles from "./page.module.css";
 
 export default function SignInCandidate() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = (e: FormEvent) => {
+  const router = useRouter();
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     if (!email || !password) {
@@ -15,13 +20,33 @@ export default function SignInCandidate() {
       return;
     }
 
-    console.log({ email, password });
+    try {
+      const response = await authenticateCandidate({ email, password });
+
+      if (response) {
+        const { id, token } = response.data;
+
+        if (id && token) {
+          localStorage.setItem("candidateId", id);
+          localStorage.setItem("token", token);
+
+          router.push("/signup/candidate/complete");
+        } else {
+          setErrorMessage("Erro ao obter o token ou ID.");
+        }
+      }
+    } catch (error: any) {
+      console.error("Erro ao autenticar:", error);
+      setErrorMessage(error.response?.data?.message || "Erro ao autenticar.");
+    }
   };
 
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit} className={styles.form}>
         <h1 className={styles.title}>Login</h1>
+
+        {errorMessage && <p className={styles.error}>{errorMessage}</p>}
 
         <div className={styles.field}>
           <label htmlFor="email">E-mail *</label>
