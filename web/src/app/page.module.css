@@ -1,0 +1,70 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  padding: 2rem;
+  background-color: var(--color-blue-900);
+  color: var(--color-white);
+}
+
+.logo {
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 2.4rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--color-white);
+}
+
+.subtitle {
+  font-size: 1.6rem;
+  margin-bottom: 3rem;
+  text-align: center;
+  color: var(--color-gray-500);
+}
+
+.buttonsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.buttonRecruiter,
+.buttonCandidate {
+  padding: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1.4rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.buttonRecruiter {
+  background-color: var(--color-green-700);
+  color: var(--color-white);
+}
+
+.buttonRecruiter:hover {
+  background-color: var(--color-green-800);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.buttonCandidate {
+  background-color: var(--color-blue-500);
+  color: var(--color-white);
+}
+
+.buttonCandidate:hover {
+  background-color: var(--color-blue-300);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
