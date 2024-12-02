@@ -1,13 +1,18 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
+import { authenticateRecruiter } from "@/services/recruiters";
 import styles from "./page.module.css";
 
 export default function SignInRecruiter() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = (e: FormEvent) => {
+  const router = useRouter();
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     if (!email || !password) {
@@ -15,13 +20,26 @@ export default function SignInRecruiter() {
       return;
     }
 
-    console.log({ email, password });
+    try {
+      const response: any = await authenticateRecruiter({ email, password });
+
+      if (response.token) {
+        localStorage.setItem("token", response.token);
+
+        router.push("/signup/recruiter/complete");
+      }
+    } catch (error: any) {
+      console.error("Erro ao autenticar:", error);
+      setErrorMessage(error.response?.data?.message || "Erro ao autenticar.");
+    }
   };
 
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit} className={styles.form}>
         <h1 className={styles.title}>Login</h1>
+
+        {errorMessage && <p className={styles.error}>{errorMessage}</p>}
 
         <div className={styles.field}>
           <label htmlFor="email">E-mail *</label>
