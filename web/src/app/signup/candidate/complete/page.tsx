@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import { useRouter } from "next/navigation";
+import { updateCandidate } from "@/services/candidates";
 import styles from "./page.module.css";
 
 export default function CompleteProfile() {
@@ -10,23 +12,45 @@ export default function CompleteProfile() {
   const [salaryMin, setSalaryMin] = useState("");
   const [salaryMax, setSalaryMax] = useState("");
   const [phone, setPhone] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = (e: FormEvent) => {
+  const router = useRouter();
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     if (!experience || !experienceTime || !phone) {
-      alert("Preencha todos os campos obrigatórios!");
+      setErrorMessage("Preencha todos os campos obrigatórios!");
       return;
     }
 
-    console.log({
-      experience,
-      skills,
-      experienceTime,
-      salaryMin,
-      salaryMax,
-      phone,
-    });
+    try {
+      const candidateId = localStorage.getItem("candidateId");
+      const token = localStorage.getItem("token");
+
+      if (!candidateId || !token) {
+        setErrorMessage("Usuário não autenticado.");
+        return;
+      }
+
+      await updateCandidate({
+        id: candidateId,
+        experience,
+        skills,
+        experienceTime,
+        salaryMin,
+        salaryMax,
+        phone,
+      });
+
+      alert("Perfil atualizado com sucesso!");
+      router.push("/profile/candidate");
+    } catch (error: any) {
+      console.error(error);
+      setErrorMessage(
+        error.response?.data?.message || "Erro ao salvar o perfil."
+      );
+    }
   };
 
   const handleAddSkill = (skill: string) => {
@@ -44,7 +68,8 @@ export default function CompleteProfile() {
       <form onSubmit={handleSubmit} className={styles.form}>
         <h1 className={styles.title}>Completar Perfil</h1>
 
-        {/* Experiência Profissional */}
+        {errorMessage && <p className={styles.error}>{errorMessage}</p>}
+
         <div className={styles.field}>
           <label htmlFor="experience">Experiência Profissional *</label>
           <textarea
@@ -56,7 +81,6 @@ export default function CompleteProfile() {
           ></textarea>
         </div>
 
-        {/* Habilidades */}
         <div className={styles.field}>
           <label htmlFor="skills">Habilidades</label>
           <div className={styles.skillsContainer}>
@@ -84,7 +108,6 @@ export default function CompleteProfile() {
           />
         </div>
 
-        {/* Tempo de Experiência */}
         <div className={styles.field}>
           <label htmlFor="experienceTime">Tempo de Experiência *</label>
           <select
@@ -101,7 +124,6 @@ export default function CompleteProfile() {
           </select>
         </div>
 
-        {/* Faixa Salarial Esperada */}
         <div className={styles.field}>
           <label htmlFor="salary">Faixa Salarial Esperada</label>
           <div className={styles.salaryContainer}>
@@ -122,7 +144,6 @@ export default function CompleteProfile() {
           </div>
         </div>
 
-        {/* Telefone */}
         <div className={styles.field}>
           <label htmlFor="phone">Telefone *</label>
           <input

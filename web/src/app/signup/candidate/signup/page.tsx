@@ -12,6 +12,7 @@ export default function SignupCandidate() {
     password: "",
     confirmPassword: "",
   });
+
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
 
@@ -36,6 +37,8 @@ export default function SignupCandidate() {
       });
 
       alert("Cadastro realizado com sucesso!");
+      setFormData({ name: "", email: "", password: "", confirmPassword: "" });
+
       router.push("/signup/candidate/signin");
     } catch (error: any) {
       console.error(error);

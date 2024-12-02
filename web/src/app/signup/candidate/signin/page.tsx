@@ -23,17 +23,15 @@ export default function SignInCandidate() {
     try {
       const response = await authenticateCandidate({ email, password });
 
-      if (response) {
-        const { id, token } = response.data;
+      const { id, token } = response;
 
-        if (id && token) {
-          localStorage.setItem("candidateId", id);
-          localStorage.setItem("token", token);
+      if (id && token) {
+        localStorage.setItem("candidateId", id);
+        localStorage.setItem("token", token);
 
-          router.push("/signup/candidate/complete");
-        } else {
-          setErrorMessage("Erro ao obter o token ou ID.");
-        }
+        router.push("/signup/candidate/complete");
+      } else {
+        setErrorMessage("Erro ao obter o token ou ID.");
       }
     } catch (error: any) {
       console.error("Erro ao autenticar:", error);
