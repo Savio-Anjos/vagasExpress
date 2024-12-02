@@ -16,10 +16,10 @@ export const authenticateCandidate = async (data: {
 };
 
 export const updateCandidate = async (data: {
-  name?: string;
   phone?: string;
   experience?: string;
   skills?: string[];
+  experienceTime?: string;
   salaryExpectation?: number;
 }) => {
   return await api.put("/candidates", data);

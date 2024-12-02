@@ -24,9 +24,11 @@ export async function authenticateCandidate(
       password,
     });
 
+    const id = candidate.id;
+
     const token = await reply.jwtSign({}, { sign: { sub: candidate.id } });
 
-    return reply.status(200).send({ token });
+    return reply.status(200).send({ token, id });
   } catch (err) {
     if (err instanceof InvalidCredentialsError) {
       return reply.status(400).send({ message: err.message });
