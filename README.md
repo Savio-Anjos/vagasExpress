@@ -9,11 +9,6 @@ Este projeto está utilizando as seguintes tecnologias:
 - [React](https://react.dev/)
 - [Next](https://nextjs.org/)
 
-## ⚠️ Aviso
-
-Infelizmente, o desenvolvimento completo deste projeto não foi finalizado devido a limitações de tempo. Um fator que impactou o tempo disponível para o desenvolvimento foi o fato de eu ser Adventista do Sétimo Dia, devido a isso eu não trabalho aos sábados. Isso limitou cerca de um terço do meu tempo disponível, mas consegui realizar as funcionalidades principais dentro do período restante, também me dediquei demais a API, isso acabou gastando muito tempo. Abaixo, você encontrará uma explicação detalhada sobre o que foi implementado até agora, junto com as instruções de como configurar o ambiente e contribuir para o desenvolvimento contínuo.
-
-Apesar de saber que o teste é para Front-end, eu quis dar uma turbinada com uma API robusta, mas infelizmente isso acabou me prejudicando, já que não consegui finalizar o front por completo, espero que possam compreender.
 
 # Principais Rotas da Aplicação
 
