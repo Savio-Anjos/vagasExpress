@@ -9,8 +9,7 @@ Este projeto está utilizando as seguintes tecnologias:
 - [React](https://react.dev/)
 - [Next](https://nextjs.org/)
 
-
-# Principais Rotas da Aplicação
+## Principais Rotas da Aplicação
 
 ### Candidatos
 
